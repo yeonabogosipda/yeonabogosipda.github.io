@@ -6,8 +6,8 @@ keywords: "Software Engineering, Mathematics, Philosophy, Scala, Epistemology, E
 biography: "I am a Professor of Software Engineering at the <a href='http://www.fe.up.pt'>Faculty of Engineering</a>, University of Porto and Senior Researcher at <a href='https://www.inesctec.pt'>INESC TEC</a>. Here you can find my <a href='/assets/thesis.pdf'>PhD Thesis</a> and my <a href='/assets/cv.pdf'>Résumé</a>."
 colophon: "© MMXIII — MMXVI by Hugo Sereno Ferreira.<br>Content available under <a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>Creative Commons (BY-NC-SA)</a> unless otherwise noted.<br>This site is hosted at <a href='https://pages.github.com/'>Github Pages</a> and created with <a href='http://jekyllrb.com/'>Jekyll</a>."
 
-baseurl: ""
-url: "http://hugosereno.eu"
+baseurl: "yeonabogosipda.github.io"
+url: "yeonabogosipda.github.io"
 
 twitter_username: ferreira_hugo
 github_username: hugoferreira
