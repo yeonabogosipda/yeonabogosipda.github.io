@@ -1,0 +1,41 @@
+I"<blockquote>
+  <p>자바스크립트 프로그램의 시작</p>
+</blockquote>
+
+<p>It’s amazing how a simple puzzle installs chaos among mathematicians and philosophers alike. Some would argue that the correct probability is ½: after all, the coin is <strong>fair</strong>, isn’t it? Others would say that the correct probability should be ⅓. Think about this problem for a second because the correct answer is… <strong>both</strong>!</p>
+
+<p>As many things in life, it’s all a matter of perspective. And the conundrum here lies in the way the problem is phrased. But before going into maths and probability theory, we shall <strong>simulate</strong>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">canvas</span> <span class="k">=</span> <span class="nv">document</span><span class="o">.</span><span class="py">getElementById</span><span class="o">(</span><span class="s">"myCanvas"</span><span class="o">);</span>
+<span class="k">var</span> <span class="n">ctx</span> <span class="k">=</span> <span class="nv">canvas</span><span class="o">.</span><span class="py">getContext</span><span class="o">(</span><span class="s">"2d"</span><span class="o">);</span>
+
+<span class="k">var</span> <span class="n">moleX</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">300</span><span class="o">,</span> <span class="mi">300</span><span class="o">);</span>
+<span class="k">var</span> <span class="n">moleY</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Array</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">250</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">250</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">250</span><span class="o">);</span>
+
+<span class="k">var</span> <span class="n">pos</span> <span class="k">=</span> <span class="o">{};</span>
+<span class="k">var</span> <span class="n">rand</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="k">var</span> <span class="n">mousePos</span> <span class="k">=</span> <span class="o">{};</span>
+<span class="k">var</span> <span class="n">isMoleHit</span> <span class="k">=</span> <span class="kc">false</span><span class="o">;</span>
+<span class="k">var</span> <span class="n">acDelta</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="k">var</span> <span class="n">msPerFrame</span> <span class="k">=</span> <span class="mi">50</span><span class="o">;</span>
+<span class="k">var</span> <span class="n">score</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="k">var</span> <span class="n">times</span> <span class="k">=</span> <span class="mi">0</span><span class="o">;</span>
+
+<span class="k">var</span> <span class="n">backImage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Image</span><span class="o">();</span>
+<span class="nv">backImage</span><span class="o">.</span><span class="py">src</span> <span class="k">=</span> <span class="s">"images/background.png"</span><span class="o">;</span>
+
+<span class="k">var</span> <span class="n">holeImage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Image</span><span class="o">();</span>
+<span class="nv">holeImage</span><span class="o">.</span><span class="py">src</span> <span class="k">=</span> <span class="s">"images/hole.png"</span><span class="o">;</span>
+
+<span class="k">var</span> <span class="n">moleImage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Image</span><span class="o">();</span>
+<span class="nv">moleImage</span><span class="o">.</span><span class="py">src</span> <span class="k">=</span> <span class="s">"images/mole.png"</span><span class="o">;</span>
+
+<span class="k">var</span> <span class="n">hammerImage</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Image</span><span class="o">();</span>
+<span class="nv">hammerImage</span><span class="o">.</span><span class="py">src</span> <span class="k">=</span> <span class="s">"images/hammer.png"</span><span class="o">;</span>
+
+<span class="k">var</span> <span class="n">hitSound</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Audio</span><span class="o">(</span><span class="ss">'sounds</span><span class="o">/</span><span class="nv">hit</span><span class="o">.</span><span class="py">mp3</span><span class="o">');</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>구조화를 시켜야하는건가?
+</code></pre></div></div>
+:ET
