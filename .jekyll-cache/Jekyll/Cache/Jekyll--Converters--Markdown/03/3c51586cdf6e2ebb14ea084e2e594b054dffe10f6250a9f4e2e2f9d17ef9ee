@@ -1,0 +1,74 @@
+I"�#<blockquote>
+  <p>자바스크립트에서 쿠키의 중요성</p>
+</blockquote>
+
+<p>자바스크립트 쿠키 예제</p>
+
+<p>또다른 쿠키 예제를 만들어보자.</p>
+
+<ol>
+  <li>
+    <p>name, value, expire값을 받아내는 setCookie 함수를 제작하고, 그 함수가 cookie를 갱신시켜주도록 한다.</p>
+  </li>
+  <li>
+    <p>name을 받으면 그 쿠키값이 무엇인지 알려주는 getCookie 함수를 제작한다.</p>
+  </li>
+  <li>
+    <p>쿠키가 존재한다면 존재하는 값에 맞게 행동하고, 존재하지 않았다면 쿠키를 만들도록 하는 chkCookie를 제작한다.</p>
+  </li>
+  <li>
+    <p>쿠키를 삭제하는 함수를 구현한다.</p>
+  </li>
+  <li>
+    <p>쿠키 기본 문서를 응용하자</p>
+  </li>
+</ol>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">function</span> <span class="nf">setCookie</span><span class="o">(</span><span class="n">cname</span><span class="o">,</span> <span class="n">cvalue</span><span class="o">,</span> <span class="n">exdays</span><span class="o">)</span> <span class="o">{</span>
+		  <span class="k">var</span> <span class="n">d</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>
+		  <span class="nv">d</span><span class="o">.</span><span class="py">setTime</span><span class="o">(</span><span class="nv">d</span><span class="o">.</span><span class="py">getTime</span><span class="o">()</span> <span class="o">+</span> <span class="o">(</span><span class="n">exdays</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">));</span>
+		  <span class="k">var</span> <span class="n">expires</span> <span class="k">=</span> <span class="s">"expires="</span><span class="o">+</span><span class="nv">d</span><span class="o">.</span><span class="py">toUTCString</span><span class="o">();</span>
+		  <span class="nv">document</span><span class="o">.</span><span class="py">cookie</span> <span class="k">=</span> <span class="n">cname</span> <span class="o">+</span> <span class="s">"="</span> <span class="o">+</span> <span class="n">cvalue</span> <span class="o">+</span> <span class="s">";"</span> <span class="o">+</span> <span class="n">expires</span> <span class="o">+</span> <span class="s">";path=/"</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="n">function</span> <span class="nf">setCookie</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">day</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">var</span> <span class="n">day</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>
+            <span class="c1">// ms단위기에 1초로 변환-&gt;60초-&gt;60분-&gt;24시간-&gt;최종적으로 day</span>
+            <span class="nv">day</span><span class="o">.</span><span class="py">setTime</span><span class="o">(</span><span class="nv">day</span><span class="o">.</span><span class="py">getTime</span><span class="o">()</span> <span class="o">+</span> <span class="o">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">day</span><span class="o">));</span>
+ 
+            <span class="k">var</span> <span class="n">expires</span> <span class="k">=</span> <span class="s">"expires="</span> <span class="o">+</span> <span class="nv">day</span><span class="o">.</span><span class="py">toUTCString</span><span class="o">();</span>
+            <span class="nv">document</span><span class="o">.</span><span class="py">cookie</span> <span class="k">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"="</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s">";"</span> <span class="o">+</span> <span class="n">expires</span> <span class="o">+</span> <span class="s">";path=/"</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">function</span> <span class="nf">getCookie</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">var</span> <span class="n">cookieAray</span> <span class="k">=</span> <span class="nv">document</span><span class="o">.</span><span class="py">cookie</span><span class="o">.</span><span class="py">split</span><span class="o">(</span><span class="s">";"</span><span class="o">);</span>
+ 
+            <span class="nf">for</span> <span class="o">(</span><span class="k">var</span> <span class="n">i</span> <span class="n">in</span> <span class="n">cookieAray</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nf">if</span><span class="o">(</span><span class="n">cookieAray</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="py">split</span><span class="o">(</span><span class="s">"="</span><span class="o">)[</span><span class="err">0</span><span class="o">].</span><span class="py">trim</span><span class="o">()</span> <span class="o">==</span> <span class="s">"username"</span><span class="o">)</span>
+                    <span class="nf">if</span> <span class="o">(</span><span class="n">cookieAray</span><span class="o">[</span><span class="kt">i</span><span class="o">][</span><span class="kt">cookieAray</span><span class="o">[</span><span class="kt">i</span><span class="o">]</span><span class="kt">.length</span> <span class="kt">-</span> <span class="err">1</span><span class="o">]</span> <span class="o">!=</span> <span class="s">"="</span><span class="o">)</span>
+                        <span class="k">return</span> <span class="n">cookieAray</span><span class="o">[</span><span class="kt">i</span><span class="o">].</span><span class="py">split</span><span class="o">(</span><span class="s">"="</span><span class="o">)[</span><span class="err">1</span><span class="o">];</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="s">""</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">function</span> <span class="nf">chkCookie</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">var</span> <span class="n">user</span> <span class="k">=</span> <span class="nf">getCookie</span><span class="o">(</span><span class="s">"username"</span><span class="o">);</span>
+ 
+            <span class="nf">if</span> <span class="o">(</span><span class="n">user</span> <span class="o">!=</span> <span class="s">""</span><span class="o">)</span> <span class="o">{</span>
+                <span class="nf">alert</span><span class="o">(</span><span class="s">"또 오셨네요 ? "</span> <span class="o">+</span> <span class="n">user</span> <span class="o">+</span> <span class="s">"님"</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="n">user</span> <span class="k">=</span> <span class="nf">prompt</span><span class="o">(</span><span class="s">"처음왔군요? 이름이 무엇인가요?"</span><span class="o">,</span> <span class="s">"예) OOO"</span><span class="o">);</span>
+ 
+                <span class="nf">if</span> <span class="o">(</span><span class="n">user</span> <span class="o">!=</span> <span class="s">""</span> <span class="o">&amp;&amp;</span> <span class="n">user</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+                    <span class="nf">setCookie</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span> <span class="n">user</span><span class="o">,</span> <span class="mi">365</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">function</span> <span class="nf">deleteCookie</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nv">document</span><span class="o">.</span><span class="py">cookie</span> <span class="k">=</span> <span class="s">"username =; expires = Wed; 01 Jan 1960"</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>쿠키에 대해 좀더깊이 있는 이해가 필요하다.</p>
+:ET
