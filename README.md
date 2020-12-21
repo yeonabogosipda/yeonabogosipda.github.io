@@ -25,21 +25,18 @@ Loosely based on the [Onelight Atom Theme](https://github.com/atom/one-light-ui)
 
 ## Git Check
 
-### 실행명령(my-awesome-site/경로에서)
+#### 실행명령(my-awesome-site/경로에서)
 	bundle exec jekyll serve --port 4000 --host 0.0.0.0
 
 	git remote rm origin
 	git pull origin master
 	git pull origin main
 
-### Master인지 main인지 확인
+#### Master인지 main인지 확인
 	git checkout master
 	git branch -m master main
 	git push -u origin main
-### 'main'브랜치가 리모트의 'main'브랜치를 ('origin'에서)따라가도록 설정되었습니다.
-### Everythig up-to-date
+	git push -u origin +master
+> 'main'브랜치가 리모트의 'main'브랜치를 ('origin'에서)따라가도록 설정되었습니다.
+> Everythig up-to-date
 
-### 2번째 성공
-	git checkout master
-	git branch -m master
-	강제명령 git push -u origin +master
