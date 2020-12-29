@@ -24,7 +24,7 @@ categories: programming
 5. 쿠키 기본 문서를 응용하자
 
 
-```scala
+```javascript
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();
 	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -41,7 +41,7 @@ function setCookie(name, value, day) {
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 ```
-```scala
+```javascript
 function getCookie(cname) {
 		 var name = cname + "=";
 		 var ca = document.cookie.split(';');
@@ -67,7 +67,7 @@ function getCookie(cname) {
         return "";
 }
 ```
-```scala
+```javascript
 function checkCookie() {
 	var user=getCookie("username");
 		  
@@ -95,7 +95,7 @@ function chkCookie() {
             }
 }
 ```
-```scala
+```javascript
 function deleteCookie() {
             document.cookie = "username =; expires = Wed; 01 Jan 1990";
 }

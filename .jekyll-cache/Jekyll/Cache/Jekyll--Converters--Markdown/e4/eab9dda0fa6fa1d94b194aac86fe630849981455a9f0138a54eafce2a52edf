@@ -1,0 +1,101 @@
+I"V9<blockquote>
+  <p>자바스크립트에서 쿠키의 중요성</p>
+</blockquote>
+
+<p>자바스크립트 쿠키 예제</p>
+
+<p>또다른 쿠키 예제를 만들어보자.</p>
+
+<ol>
+  <li>
+    <p>name, value, expire값을 받아내는 setCookie 함수를 제작하고, 그 함수가 cookie를 갱신시켜주도록 한다.</p>
+  </li>
+  <li>
+    <p>name을 받으면 그 쿠키값이 무엇인지 알려주는 getCookie 함수를 제작한다.</p>
+  </li>
+  <li>
+    <p>쿠키가 존재한다면 존재하는 값에 맞게 행동하고, 존재하지 않았다면 쿠키를 만들도록 하는 chkCookie를 제작한다.</p>
+  </li>
+  <li>
+    <p>쿠키를 삭제하는 함수를 구현한다.</p>
+  </li>
+  <li>
+    <p>쿠키 기본 문서를 응용하자</p>
+  </li>
+</ol>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">setCookie</span><span class="p">(</span><span class="nx">cname</span><span class="p">,</span> <span class="nx">cvalue</span><span class="p">,</span> <span class="nx">exdays</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+	<span class="nx">d</span><span class="p">.</span><span class="nx">setTime</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="nx">exdays</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">));</span>
+	<span class="kd">var</span> <span class="nx">expires</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">expires=</span><span class="dl">"</span><span class="o">+</span><span class="nx">d</span><span class="p">.</span><span class="nx">toUTCString</span><span class="p">();</span>
+	<span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="nx">cname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">cvalue</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">expires</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">;path=/</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">setCookie</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">day</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">day</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+        <span class="c1">// ms단위기에 1초로 변환-&gt;60초-&gt;60분-&gt;24시간-&gt;최종적으로 day</span>
+        <span class="nx">day</span><span class="p">.</span><span class="nx">setTime</span><span class="p">(</span><span class="nx">day</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="nx">day</span><span class="p">));</span>
+ 
+        <span class="kd">var</span> <span class="nx">expires</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">expires=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">day</span><span class="p">.</span><span class="nx">toUTCString</span><span class="p">();</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">=</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">expires</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">;path=/</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getCookie</span><span class="p">(</span><span class="nx">cname</span><span class="p">)</span> <span class="p">{</span>
+		 <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">cname</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">;</span>
+		 <span class="kd">var</span> <span class="nx">ca</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">;</span><span class="dl">'</span><span class="p">);</span>
+		 <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ca</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">ca</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+			<span class="k">while</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+			  <span class="nx">c</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+			<span class="p">}</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+			  <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+			<span class="p">}</span>
+		 <span class="p">}</span>
+		 <span class="k">return</span> <span class="dl">""</span><span class="p">;</span>
+<span class="p">}</span>
+ <span class="kd">function</span> <span class="nx">getCookie</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">cookieAray</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">;</span><span class="dl">"</span><span class="p">);</span>
+ 
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">cookieAray</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">cookieAray</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">trim</span><span class="p">()</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">username</span><span class="dl">"</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">cookieAray</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">cookieAray</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">)</span>
+                        <span class="k">return</span> <span class="nx">cookieAray</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">=</span><span class="dl">"</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="dl">""</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">checkCookie</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">user</span><span class="o">=</span><span class="nx">getCookie</span><span class="p">(</span><span class="dl">"</span><span class="s2">username</span><span class="dl">"</span><span class="p">);</span>
+		  
+	<span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">!=</span> <span class="dl">""</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Welcome again </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">user</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">user</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">Please enter your name:</span><span class="dl">"</span><span class="p">,</span><span class="dl">""</span><span class="p">);</span>
+			 	
+			<span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">!=</span> <span class="dl">""</span> <span class="o">&amp;&amp;</span> <span class="nx">user</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">setCookie</span><span class="p">(</span><span class="dl">"</span><span class="s2">username</span><span class="dl">"</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">chkCookie</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">getCookie</span><span class="p">(</span><span class="dl">"</span><span class="s2">username</span><span class="dl">"</span><span class="p">);</span>
+ 
+            <span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">!=</span> <span class="dl">""</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">또 오셨네요 ? </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">user</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">님</span><span class="dl">"</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">user</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">처음왔군요? 이름이 무엇인가요?</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">예) OOO</span><span class="dl">"</span><span class="p">);</span>
+ 
+                <span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">!=</span> <span class="dl">""</span> <span class="o">&amp;&amp;</span> <span class="nx">user</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+                    <span class="nx">setCookie</span><span class="p">(</span><span class="dl">"</span><span class="s2">username</span><span class="dl">"</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="mi">365</span><span class="p">);</span>
+            <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">deleteCookie</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">username =; expires = Wed; 01 Jan 1990</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>쿠키에 대해 좀더깊이 있는 이해가 필요하다.</p>
+:ET

@@ -1,0 +1,27 @@
+I"s
+<blockquote>
+  <p>php에서 codeigniter의 중요성</p>
+</blockquote>
+
+<p>codeigniter 예제</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="kd">class</span> <span class="nc">Test_model</span> <span class="kd">extends</span> <span class="nc">CI_Model</span><span class="p">{</span> 
+<span class="k">function</span> <span class="n">__construct</span><span class="p">()</span> 
+	<span class="p">{</span> 
+		<span class="k">parent</span><span class="o">::</span><span class="nf">__construct</span><span class="p">();</span> 
+	<span class="p">}</span> 
+	<span class="k">function</span> <span class="n">gets</span><span class="p">(){</span> 
+	<span class="nv">$strQuery</span> <span class="o">=</span> <span class="s2">"SELECT * FROM test"</span><span class="p">;</span> <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">db</span><span class="o">-&gt;</span><span class="nf">query</span><span class="p">(</span><span class="nv">$strQuery</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">result</span><span class="p">();</span> 
+	<span class="p">}</span> 
+	<span class="k">function</span> <span class="n">get1</span><span class="p">(</span><span class="nv">$seq</span><span class="p">){</span> 
+	<span class="nv">$strQuery</span> <span class="o">=</span> <span class="s2">"SELECT * FROM test where seq = "</span> <span class="mf">.</span> <span class="nv">$seq</span><span class="p">;</span> <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">db</span><span class="o">-&gt;</span><span class="nf">query</span><span class="p">(</span><span class="nv">$strQuery</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">result</span><span class="p">();</span> 
+	<span class="p">}</span> 
+	<span class="k">function</span> <span class="n">get2</span><span class="p">(</span><span class="nv">$seq</span><span class="p">){</span> 
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">db</span><span class="o">-&gt;</span><span class="nf">get_where</span><span class="p">(</span><span class="s1">'test'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span><span class="s1">'seq'</span><span class="o">=&gt;</span><span class="nv">$seq</span><span class="p">))</span><span class="o">-&gt;</span><span class="nf">row</span><span class="p">();</span> 
+	<span class="p">}</span> 
+<span class="p">}</span> <span class="cp">?&gt;</span>
+
+
+</code></pre></div></div>
+
+:ET
