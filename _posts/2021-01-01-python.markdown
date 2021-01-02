@@ -1,0 +1,22 @@
+---
+layout: post
+title: crawling
+date: 2021-01-01 12:00
+comments: true
+external-url:
+categories: python
+---
+
+> python에서 crawling의 중요성
+
+crawling 예제
+
+```python
+import requests
+from bs4 import BeautifulSoup
+webpage = requests.get("https://www.daangn.com/hot_articles")
+soup = BeautifulSoup(webpage.content, "html.parser")
+print(soup)
+```
+
+
